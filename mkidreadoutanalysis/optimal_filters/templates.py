@@ -32,7 +32,7 @@ def _compute_fall_time(data, t=None):
 
 
 def exponential(t, a, t0, fall_time):
-    p = np.zeros_like(t, dtype=np.float)
+    p = np.zeros_like(t, dtype=np.float64)
     arg1 = -(t[t >= t0] - t0) / max(EPS, fall_time)
     p[t >= t0] = a * np.exp(arg1)
     return p
@@ -51,7 +51,7 @@ def _exponential_guess(model, data, t=None, **kwargs):
 
 
 def double_exponential(t, a, t0, rise_time, fall_time):
-    p = np.zeros_like(t, dtype=np.float)
+    p = np.zeros_like(t, dtype=np.float64)
     arg0 = -(t[t >= t0] - t0) / max(EPS, rise_time)
     arg1 = -(t[t >= t0] - t0) / max(EPS, fall_time)
     p[t >= t0] = a * (1 - np.exp(arg0)) * np.exp(arg1)
@@ -73,7 +73,7 @@ def _double_exponential_guess(model, data, t=None, **kwargs):
 
 
 def triple_exponential(t, a, b, t0, rise_time, fall_time1, fall_time2):
-    p = np.zeros_like(t, dtype=np.float)
+    p = np.zeros_like(t, dtype=np.float64)
     arg0 = -(t[t >= t0] - t0) / max(EPS, rise_time)
     arg1 = -(t[t >= t0] - t0) / max(EPS, fall_time1)
     arg2 = -(t[t >= t0] - t0) / max(EPS, fall_time2)
